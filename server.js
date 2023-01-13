@@ -4,7 +4,7 @@ const fs=require('fs');
 
 const server=http.createServer((req, res)=>{
     if(req.method==='GET'){
-        fs.readFile('./View/Calculator.html',(err, data)=>{
+        fs.readFile('./View/Calculator.html','utf-8',(err, data)=>{
             res.writeHead(200,{'Content-Type':'text-html'});
             res.write(data);
             return res.end();
@@ -19,16 +19,18 @@ const server=http.createServer((req, res)=>{
             const dataCalculator=qs.parse(data);
             switch (dataCalculator.select){
                 case '+':
-                    result=+(dataCalculator.firstNumber+dataCalculator.secondNumber);
+                    result= +(dataCalculator.firstNumber+dataCalculator.secondNumber);
                     break;
                 case '-':
-                    result=+(dataCalculator.firstNumber-dataCalculator.secondNumber);
+                    result= +(dataCalculator.firstNumber-dataCalculator.secondNumber);
                     break;
                 case '*':
-                    result=+(dataCalculator.firstNumber*dataCalculator.secondNumber);
+                    result= +(dataCalculator.firstNumber*dataCalculator.secondNumber);
                     break;
                 case '/':
-                    result=+(dataCalculator.firstNumber/dataCalculator.secondNumber);
+                    result= +(dataCalculator.firstNumber/dataCalculator.secondNumber);
+                    break;
+                default:
                     break;
             }
             fs.readFile('./View/Display.html','utf-8',(err,dataResult)=>{
